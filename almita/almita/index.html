@@ -1,16 +1,99 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mis XV Años | Almita</title><link rel="stylesheet" href="style.css"></head><body>
-<section id="intro" class="intro"><button id="envelope" class="envelope" aria-label="Abrir invitación"><span class="flap"></span><span class="seal">🦋</span></button><p>TOCA EL SOBRE<br>PARA ABRIR<br>MI INVITACIÓN</p></section>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#160b1d">
+  <title>Mis XV Años | Almita</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section class="cover" id="cover">
+  <div class="cover-frame">
+    <img src="assets/portada-almita.png" alt="Invitación de XV años de Almita">
+    <button id="openBtn" class="open-btn">ABRIR <span>›</span></button>
+  </div>
+</section>
+
 <main id="invite" hidden>
-<section><div class="card">🦋<h2>Una historia muy especial está por comenzar…</h2></div></section>
-<section><small>CELEBREMOS JUNTOS</small><h1>MIS XV AÑOS</h1><b>✦ ❀ ✦</b></section>
-<section><h2>Hace 15 años nació<br>una hermosa princesa…</h2></section>
-<section><h2>Tenemos el honor de invitarlos a compartir una noche llena de magia, alegría y recuerdos inolvidables.</h2></section>
-<section><small>MIS XV AÑOS</small><h1 class="almita">Almita</h1><b class="crown">♕</b></section>
-<section><h2><i>He aprendido que los sueños se construyen con amor, que cada instante guarda un recuerdo y que las personas especiales hacen inolvidable el camino.</i></h2></section>
-<section><div class="card"><h2>Un detalle especial</h2><p>El color <strong>morado / lila</strong> está reservado para la quinceañera.</p></div></section>
-<section><small>CÓDIGO DE VESTIMENTA</small><h1>Guapos &amp; Divinas</h1></section>
-<section><div class="card"><small>¿NOS ACOMPAÑAS?</small><h2>Confirma tu asistencia</h2><button id="rsvp">CONFIRMAR ASISTENCIA</button><p class="note">Pendiente conectar el destino de las confirmaciones.</p></div></section>
-<section><small>GUARDA LA FECHA</small><h1>03</h1><h2>SÁBADO · OCTUBRE · 5:00 PM</h2></section>
-<section><div class="card"><small>LUGAR</small><h2>Restaurante El Fogón Zabdi</h2><p>Calzada 15 de Septiembre<br>Santa Lucía Cotzumalguapa, Guatemala</p><a href="https://www.google.com/maps/search/?api=1&query=Restaurante+El+Fog%C3%B3n+Zabdi+Santa+Luc%C3%ADa+Cotzumalguapa+Guatemala" target="_blank">CÓMO LLEGAR</a></div></section>
-<section><b class="crown">♕</b><h1>Te esperamos</h1><p>para celebrar una noche inolvidable.</p><div class="almita">Almita</div></section>
-</main><audio id="music" preload="auto"></audio><script src="script.js"></script></body></html>
+  <section class="scene dark reveal">
+    <div class="glass">
+      <div class="butterfly">🦋</div>
+      <p class="lead">Una historia muy especial<br>está por comenzar…</p>
+    </div>
+  </section>
+
+  <section class="scene arch reveal">
+    <p class="eyebrow">CELEBREMOS JUNTOS</p>
+    <h1>MIS XV<br>AÑOS</h1>
+    <div class="ornament">✦ ❀ ✦</div>
+  </section>
+
+  <section class="scene soft reveal">
+    <p class="story">Hace 15 años nació<br><strong>una hermosa princesa…</strong></p>
+  </section>
+
+  <section class="scene soft reveal">
+    <p class="story">Tenemos el honor de invitarlos a celebrar los XV años de</p>
+  </section>
+
+  <section class="scene throne reveal">
+    <div class="crown">♕</div>
+    <h2 class="name">Almita</h2>
+  </section>
+
+  <section class="scene soft reveal">
+    <p class="reflection">He aprendido que la vida es un regalo, que cada día es una oportunidad para ser mejor, que los sueños se alcanzan con esfuerzo, y que lo más importante es rodearse de las personas que hacen este camino más especial.</p>
+  </section>
+
+  <section class="scene soft reveal">
+    <div class="glass">
+      <p class="lead">El color <strong>morado / lila</strong><br>está reservado para la quinceañera.</p>
+    </div>
+  </section>
+
+  <section class="scene soft reveal">
+    <p class="eyebrow">CÓDIGO DE VESTIMENTA</p>
+    <h3 class="dress">Guapos<br>&amp;<br>Divinas</h3>
+  </section>
+
+  <section class="scene soft reveal">
+    <div class="glass">
+      <div class="mail">✉</div>
+      <h3>Confirma<br>tu asistencia</h3>
+      <button id="rsvpBtn" class="primary">CONFIRMAR AHORA</button>
+      <p class="micro">Pendiente conectar la confirmación real.</p>
+    </div>
+  </section>
+
+  <section class="scene soft reveal">
+    <p class="eyebrow">GUARDA LA FECHA</p>
+    <div class="date"><strong>03</strong><span>OCTUBRE</span></div>
+    <p class="time">Sábado · 5:00 p. m.</p>
+  </section>
+
+  <section class="scene soft reveal">
+    <div class="glass">
+      <p class="eyebrow">LUGAR</p>
+      <h3>Restaurante<br>El Fogón Zabdi</h3>
+      <p>Calzada 15 de Septiembre<br>Santa Lucía Cotzumalguapa, Guatemala</p>
+      <a class="primary" target="_blank" rel="noopener"
+         href="https://www.google.com/maps/search/?api=1&query=Restaurante+El+Fog%C3%B3n+Zabdi+Santa+Luc%C3%ADa+Cotzumalguapa+Guatemala">
+        CÓMO LLEGAR
+      </a>
+    </div>
+  </section>
+
+  <section class="scene finale reveal">
+    <div class="crown">♕</div>
+    <h2>Te esperamos</h2>
+    <p>para compartir una noche inolvidable.</p>
+    <div class="name small">Almita</div>
+  </section>
+</main>
+
+<audio id="music" preload="auto"></audio>
+<script src="script.js"></script>
+</body>
+</html>
