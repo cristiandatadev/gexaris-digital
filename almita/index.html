@@ -1,298 +1,107 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mis XV Años | Almita</title>
-
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    min-height: 100vh;
-    overflow: hidden;
-    font-family: Georgia, "Times New Roman", serif;
-    background:
-        radial-gradient(circle at 20% 20%, rgba(190,140,230,.22), transparent 25%),
-        radial-gradient(circle at 80% 70%, rgba(155,90,200,.18), transparent 30%),
-        linear-gradient(160deg, #100817, #25112f 55%, #0d0712);
-    color: #f7e9ff;
-}
-
-/* ESCENA COMPLETA */
-.intro {
-    min-height: 100vh;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 30px 20px;
-    isolation: isolate;
-}
-
-/* RESPLANDOR CENTRAL */
-.glow {
-    position: absolute;
-    width: 420px;
-    height: 420px;
-    border-radius: 50%;
-    background: radial-gradient(
-        circle,
-        rgba(196,135,231,.25),
-        rgba(111,52,145,.08) 45%,
-        transparent 70%
-    );
-    filter: blur(15px);
-    z-index: -1;
-}
-
-/* PARTÍCULAS */
-.sparkle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: white;
-    box-shadow: 0 0 10px #fff;
-    opacity: .7;
-    animation: twinkle 2.5s infinite alternate;
-}
-
-.s1 { top: 14%; left: 18%; }
-.s2 { top: 24%; right: 15%; animation-delay: .7s; }
-.s3 { bottom: 20%; left: 12%; animation-delay: 1.2s; }
-.s4 { bottom: 13%; right: 20%; animation-delay: .3s; }
-
-@keyframes twinkle {
-    from {
-        opacity: .15;
-        transform: scale(.7);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1.7);
-    }
-}
-
-/* SOBRE */
-.envelope-wrapper {
-    position: relative;
-    width: min(82vw, 370px);
-    aspect-ratio: 1.48 / 1;
-    cursor: pointer;
-    perspective: 1200px;
-    filter: drop-shadow(0 25px 30px rgba(0,0,0,.45));
-    transition: transform .35s ease;
-}
-
-.envelope-wrapper:hover {
-    transform: translateY(-4px);
-}
-
-.envelope {
-    position: absolute;
-    inset: 0;
-    border-radius: 7px;
-    background:
-        linear-gradient(
-            145deg,
-            #b58bc5,
-            #8c639f 45%,
-            #684576
-        );
-    overflow: visible;
-}
-
-/* BRILLO DEL PAPEL */
-.envelope::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background:
-        radial-gradient(circle at 20% 30%, rgba(255,255,255,.24) 0 1px, transparent 2px),
-        radial-gradient(circle at 70% 65%, rgba(255,255,255,.18) 0 1px, transparent 2px);
-    background-size: 28px 28px, 35px 35px;
-    opacity: .5;
-    pointer-events: none;
-}
-
-/* DOBLECES INFERIORES */
-.left-fold,
-.right-fold {
-    position: absolute;
-    bottom: 0;
-    width: 51%;
-    height: 72%;
-    z-index: 2;
-}
-
-.left-fold {
-    left: 0;
-    background: linear-gradient(35deg, #89609b, #ad83bc);
-    clip-path: polygon(0 0, 100% 100%, 0 100%);
-}
-
-.right-fold {
-    right: 0;
-    background: linear-gradient(-35deg, #765086, #a879b7);
-    clip-path: polygon(100% 0, 100% 100%, 0 100%);
-}
-
-/* SOLAPA */
-.flap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 72%;
-    background: linear-gradient(165deg, #c6a0d1, #9369a5);
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
-    transform-origin: top center;
-    transition: transform 1.15s cubic-bezier(.65,0,.25,1);
-    z-index: 5;
-    backface-visibility: hidden;
-}
-
-/* SELLO */
-.seal {
-    position: absolute;
-    left: 50%;
-    top: 55%;
-    transform: translate(-50%, -50%);
-    width: 68px;
-    height: 68px;
-    border-radius: 50%;
-    z-index: 7;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background:
-        radial-gradient(circle at 35% 30%, #d9b67c, #9c713c 42%, #51331d 75%);
-
-    border: 2px solid rgba(255,224,170,.7);
-
-    box-shadow:
-        0 5px 12px rgba(0,0,0,.4),
-        inset 0 0 8px rgba(255,232,180,.45);
-
-    transition: opacity .35s, transform .5s;
-}
-
-.butterfly {
-    font-size: 31px;
-    filter: sepia(.2);
-}
-
-/* TEXTO */
-.tap-text {
-    margin-top: 55px;
-    text-align: center;
-    font-size: clamp(16px, 4.5vw, 21px);
-    line-height: 1.45;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-shadow: 0 2px 10px rgba(0,0,0,.5);
-}
-
-.arrow {
-    margin-top: 22px;
-    font-size: 30px;
-    animation: bounce 1.6s infinite;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(8px); }
-}
-
-/* APERTURA */
-.envelope-wrapper.open .flap {
-    transform: rotateX(180deg);
-    z-index: 1;
-}
-
-.envelope-wrapper.open .seal {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(.6);
-}
-
-.envelope-wrapper.open {
-    transform: translateY(10px);
-}
-
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#1a0c22">
+  <title>Mis XV Años | Almita</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<section class="intro">
-
-    <div class="glow"></div>
-
-    <span class="sparkle s1"></span>
-    <span class="sparkle s2"></span>
-    <span class="sparkle s3"></span>
-    <span class="sparkle s4"></span>
-
-    <div
-        class="envelope-wrapper"
-        id="envelope"
-        role="button"
-        tabindex="0"
-        aria-label="Abrir invitación"
-    >
-
-        <div class="envelope">
-
-            <div class="flap"></div>
-
-            <div class="left-fold"></div>
-            <div class="right-fold"></div>
-
-            <div class="seal">
-                <span class="butterfly">🦋</span>
-            </div>
-
-        </div>
-
-    </div>
-
-    <p class="tap-text">
-        Toca el sobre<br>
-        para abrir<br>
-        mi invitación
-    </p>
-
-    <div class="arrow">⌄</div>
-
+<section class="cover" id="cover">
+  <img src="assets/portada-almita.png" alt="Invitación de XV años de Almita">
+  <button id="openBtn" class="open-hit" aria-label="Abrir invitación"></button>
 </section>
 
+<main id="invite" hidden>
 
-<script>
+  <section class="scene dark reveal">
+    <div class="glass">
+      <div class="butterfly">🦋</div>
+      <p class="lead">Una historia muy especial<br>está por comenzar…</p>
+    </div>
+  </section>
 
-const envelope = document.getElementById("envelope");
+  <section class="scene arch reveal">
+    <p class="eyebrow">CELEBREMOS JUNTOS</p>
+    <h1>MIS XV<br>AÑOS</h1>
+    <div class="ornament">✦ ❀ ✦</div>
+  </section>
 
-function openEnvelope() {
-    envelope.classList.add("open");
-}
+  <section class="scene soft reveal">
+    <p class="story">Hace 15 años nació<br><strong>una hermosa princesa…</strong></p>
+  </section>
 
-envelope.addEventListener("click", openEnvelope);
+  <section class="scene soft reveal">
+    <p class="story">Tenemos el honor de invitarlos a celebrar los XV años de</p>
+  </section>
 
-envelope.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" || event.key === " ") {
-        openEnvelope();
-    }
-});
+  <section class="scene throne reveal">
+    <div class="crown">♕</div>
+    <h2 class="name">Almita</h2>
+  </section>
 
-</script>
+  <section class="scene soft reveal">
+    <p class="reflection">
+      He aprendido que la vida es un regalo, que cada día es una oportunidad para ser mejor,
+      que los sueños se alcanzan con esfuerzo, y que lo más importante es rodearse de las
+      personas que hacen este camino más especial.
+    </p>
+  </section>
 
+  <section class="scene soft reveal">
+    <div class="glass">
+      <p class="lead">El color <strong>morado / lila</strong><br>está reservado para la quinceañera.</p>
+      <div class="bow">🎀</div>
+    </div>
+  </section>
+
+  <section class="scene soft reveal">
+    <p class="eyebrow">CÓDIGO DE VESTIMENTA</p>
+    <h3 class="dress">Guapos<br>&<br>Divinas</h3>
+  </section>
+
+  <section class="scene soft reveal">
+    <div class="glass">
+      <div class="mail">✉</div>
+      <h3>Confirma<br>tu asistencia</h3>
+      <button id="rsvpBtn" class="primary">CONFIRMAR AHORA</button>
+      <p class="micro">La confirmación real se conectará al medio que elijas.</p>
+    </div>
+  </section>
+
+  <section class="scene soft reveal">
+    <p class="eyebrow">GUARDA LA FECHA</p>
+    <div class="date">
+      <strong>03</strong>
+      <span>OCTUBRE</span>
+    </div>
+    <p class="time">Sábado · 5:00 p. m.</p>
+  </section>
+
+  <section class="scene soft reveal">
+    <div class="glass">
+      <p class="eyebrow">LUGAR</p>
+      <h3>Restaurante<br>El Fogón Zabdi</h3>
+      <p>Calzada 15 de Septiembre<br>Santa Lucía Cotzumalguapa, Guatemala</p>
+      <a class="primary" target="_blank" rel="noopener"
+         href="https://www.google.com/maps/search/?api=1&query=Restaurante+El+Fog%C3%B3n+Zabdi+Santa+Luc%C3%ADa+Cotzumalguapa+Guatemala">
+        CÓMO LLEGAR
+      </a>
+    </div>
+  </section>
+
+  <section class="scene finale reveal">
+    <div class="crown">♕</div>
+    <h2>Te esperamos</h2>
+    <p>para compartir una noche inolvidable.</p>
+    <div class="name small">Almita</div>
+  </section>
+
+</main>
+
+<audio id="music" preload="auto"></audio>
+<script src="script.js"></script>
 </body>
 </html>
