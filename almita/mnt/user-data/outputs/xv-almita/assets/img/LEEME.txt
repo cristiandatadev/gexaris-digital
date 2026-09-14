@@ -1,0 +1,14 @@
+PENDIENTE: agrega aquí las fotografías de Almita que quieras mostrar
+en la sección de Galería (por ejemplo: foto1.jpg, foto2.jpg, foto3.jpg, foto4.jpg).
+
+Luego, en index.html, busca la sección:
+  <section class="scene bg-deep" id="s-galeria">
+
+Y reemplaza cada bloque:
+  <div class="ph-photo">Foto 1</div>
+
+por:
+  <img src="assets/img/foto1.jpg" alt="Almita" class="ph-photo">
+
+(puedes ajustar el estilo de <img class="ph-photo"> en style.css,
+la clase ya tiene el marco y las proporciones listas).
