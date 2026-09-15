@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mis XV - Cuarta Sección</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Great+Vibes&display=swap');
+
+:root{
+  --deep:#26122f;
+  --mid:#684878;
+  --lav:#9b7aaa;
+  --light:#c8b1d0;
+  --ink:#35153f;
+  --gold:#dfc47d;
+  --flower1:#cba6d7;
+  --flower2:#a97abb;
+  --flower3:#e3c9e8;
+  --leaf:#6f557b;
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  width:100%;
+  min-height:100%;
+}
+
+body{
+  font-family:'Cormorant Garamond',serif;
+  overflow-x:hidden;
+  background:var(--deep);
+}
+
+.invitacion{
+  min-height:100svh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  padding:34px 20px;
+
+  /* oscuro arriba y abajo; lavanda iluminado al centro */
+  background:
+    radial-gradient(ellipse at 50% 47%,
+      rgba(218,199,224,.95) 0%,
+      rgba(184,157,195,.90) 29%,
+      rgba(137,101,151,.78) 55%,
+      transparent 76%),
+    linear-gradient(180deg,
+      #2c1636 0%,
+      #4b2b59 18%,
+      #775487 42%,
+      #8f6b9e 61%,
+      #5a3868 82%,
+      #2a1434 100%);
+}
+
+/* halo central */
+.invitacion::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:48%;
+  transform:translate(-50%,-50%);
+  width:min(86vw,620px);
+  height:70svh;
+  border-radius:48%;
+  background:radial-gradient(
+    ellipse,
+    rgba(244,234,247,.46),
+    rgba(220,201,227,.16) 52%,
+    transparent 75%
+  );
+  filter:blur(10px);
+  z-index:0;
+}
+
+/* viñeta sutil */
+.invitacion::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(29,11,36,.28),transparent 17%,transparent 83%,rgba(29,11,36,.28)),
+    linear-gradient(180deg,rgba(20,7,26,.18),transparent 22%,transparent 76%,rgba(20,7,26,.24));
+  z-index:1;
+}
+
+/* =========================
+   RAMOS FLORALES
+   ========================= */
+
+.ramo{
+  position:absolute;
+  z-index:3;
+  width:clamp(155px,31vw,290px);
+  height:clamp(190px,35vh,330px);
+  pointer-events:none;
+}
+
+.ramo.sup-izq{top:-28px;left:-24px}
+.ramo.sup-der{top:-28px;right:-24px;transform:scaleX(-1)}
+.ramo.inf-izq{bottom:-35px;left:-28px;transform:scaleY(-1)}
+.ramo.inf-der{bottom:-35px;right:-28px;transform:scale(-1)}
+
+.ramo span{
+  position:absolute;
+  display:block;
+  line-height:1;
+  filter:drop-shadow(0 3px 5px rgba(35,14,43,.20));
+}
+
+.fg{
+  font-size:clamp(42px,7vw,65px);
+  color:var(--flower1);
+  text-shadow:0 0 14px rgba(225,195,234,.30);
+}
+
+.fm{
+  font-size:clamp(31px,5.5vw,48px);
+  color:var(--flower2);
+}
+
+.fp{
+  font-size:clamp(21px,4vw,34px);
+  color:var(--flower3);
+}
+
+.leaf{
+  font-size:clamp(29px,5vw,45px);
+  color:var(--leaf);
+}
+
+.bud{
+  font-size:clamp(17px,3vw,25px);
+  color:#d9bde1;
+}
+
+.ramo span:nth-child(1){top:5%;left:3%}
+.ramo span:nth-child(2){top:17%;left:22%}
+.ramo span:nth-child(3){top:2%;left:43%}
+.ramo span:nth-child(4){top:32%;left:3%;transform:rotate(-30deg)}
+.ramo span:nth-child(5){top:34%;left:37%}
+.ramo span:nth-child(6){top:18%;left:65%;transform:rotate(25deg)}
+.ramo span:nth-child(7){top:52%;left:17%}
+.ramo span:nth-child(8){top:53%;left:56%;transform:rotate(35deg)}
+.ramo span:nth-child(9){top:69%;left:4%}
+.ramo span:nth-child(10){top:72%;left:40%}
+.ramo span:nth-child(11){top:43%;left:77%}
+.ramo span:nth-child(12){top:82%;left:68%;transform:rotate(25deg)}
+.ramo span:nth-child(13){top:13%;left:88%;transform:rotate(35deg)}
+.ramo span:nth-child(14){top:89%;left:21%;transform:rotate(-20deg)}
+
+/* flores desenfocadas para profundidad */
+.blur-flower{
+  position:absolute;
+  z-index:2;
+  color:#c6a0d2;
+  opacity:.25;
+  filter:blur(4px);
+  pointer-events:none;
+}
+
+.bf1{left:2%;top:42%;font-size:78px;transform:rotate(-20deg)}
+.bf2{right:1%;bottom:32%;font-size:92px;transform:rotate(18deg)}
+
+/* mariposas volando: entran y salen de la pantalla */
+.butterfly{
+  position:absolute;
+  z-index:4;
+  color:#c79bd5;
+  text-shadow:0 0 14px rgba(221,184,232,.45);
+  pointer-events:none;
+  will-change:transform,opacity;
+}
+
+.b1{
+  left:-12%;
+  top:27%;
+  font-size:30px;
+  animation:vuelo1 11s ease-in-out infinite;
+}
+
+.b2{
+  right:-14%;
+  top:58%;
+  font-size:25px;
+  animation:vuelo2 13s ease-in-out infinite 2s;
+}
+
+/* =========================
+   TEXTO
+   ========================= */
+
+.contenido{
+  position:relative;
+  z-index:6;
+  width:min(78vw,560px);
+  text-align:center;
+  padding:75px 15px 90px;
+  color:var(--ink);
+}
+
+.frase{
+  margin:0;
+  color:var(--ink);
+  opacity:0;
+  transform:translateY(18px);
+  animation:aparecer 2.2s ease forwards .35s;
+}
+
+.honor{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(37px,7.3vw,64px);
+  font-weight:600;
+  line-height:1;
+  letter-spacing:.025em;
+  text-transform:uppercase;
+  text-shadow:
+    0 1px 1px rgba(255,255,255,.48),
+    0 0 14px rgba(255,255,255,.16);
+}
+
+.invitar{
+  margin-top:17px;
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(48px,9.5vw,78px);
+  font-weight:400;
+  line-height:.95;
+  color:#5b3268;
+  text-shadow:0 0 10px rgba(255,255,255,.28);
+}
+
+.celebrar{
+  margin-top:29px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(27px,5.2vw,43px);
+  font-weight:600;
+  line-height:1;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+}
+
+.xv{
+  display:block;
+  margin-top:38px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(58px,11vw,96px);
+  line-height:.95;
+  font-weight:600;
+  letter-spacing:.08em;
+  color:#3f2149;
+  text-shadow:
+    0 0 7px rgba(255,255,255,.38),
+    0 0 18px rgba(153,102,170,.20),
+    0 0 30px rgba(223,196,125,.12);
+  animation:respiraXV 7s ease-in-out infinite;
+}
+
+.de{
+  margin-top:14px;
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(42px,8vw,65px);
+  line-height:1;
+  color:#5a3266;
+  text-shadow:0 0 10px rgba(255,255,255,.24);
+}
+
+.ornamento{
+  margin:27px auto 0;
+  width:175px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  color:#563164;
+  opacity:0;
+  animation:aparecer 2s ease forwards 1.3s;
+}
+
+.ornamento::before,
+.ornamento::after{
+  content:"";
+  height:1px;
+  width:57px;
+  background:linear-gradient(90deg,transparent,#563164);
+}
+
+.ornamento::after{
+  background:linear-gradient(90deg,#563164,transparent);
+}
+
+
+/* flecha inferior */
+.scroll-cue{
+  position:absolute;
+  z-index:7;
+  left:50%;
+  bottom:20px;
+  transform:translateX(-50%);
+  color:#f4eaf7;
+  text-shadow:0 0 9px rgba(31,12,38,.45);
+}
+
+.arrow{
+  display:block;
+  font-size:34px;
+  animation:bounce 1.8s ease-in-out infinite;
+}
+
+/* pequeños destellos */
+.spark{
+  position:absolute;
+  z-index:4;
+  color:var(--gold);
+  opacity:0;
+  text-shadow:0 0 10px rgba(239,209,134,.75);
+  animation:twinkle 4.5s ease-in-out infinite;
+}
+
+.s1{left:18%;top:21%;font-size:15px}
+.s2{right:19%;top:35%;font-size:18px;animation-delay:1.3s}
+.s3{left:20%;bottom:22%;font-size:17px;animation-delay:2.4s}
+
+@keyframes respiraXV{
+  0%,100%{
+    text-shadow:
+      0 0 6px rgba(255,255,255,.30),
+      0 0 14px rgba(153,102,170,.16);
+  }
+  50%{
+    text-shadow:
+      0 0 9px rgba(255,255,255,.55),
+      0 0 24px rgba(153,102,170,.34),
+      0 0 38px rgba(223,196,125,.18);
+  }
+}
+
+@keyframes aparecer{
+  to{opacity:1;transform:translateY(0)}
+}
+
+@keyframes vuelo1{
+  0%{
+    transform:translate(-12vw,18vh) rotate(-32deg) scale(.82);
+    opacity:0;
+  }
+  9%{opacity:1}
+  22%{
+    transform:translate(24vw,-2vh) rotate(-12deg) scale(.96);
+  }
+  42%{
+    transform:translate(47vw,-10vh) rotate(10deg) scale(1.04);
+  }
+  62%{
+    transform:translate(70vw,2vh) rotate(27deg) scale(1);
+  }
+  82%{
+    transform:translate(94vw,-8vh) rotate(12deg) scale(.92);
+    opacity:1;
+  }
+  100%{
+    transform:translate(122vw,-20vh) rotate(-18deg) scale(.78);
+    opacity:0;
+  }
+}
+
+@keyframes vuelo2{
+  0%{
+    transform:translate(12vw,12vh) rotate(30deg) scale(.76);
+    opacity:0;
+  }
+  10%{opacity:1}
+  25%{
+    transform:translate(-22vw,-4vh) rotate(12deg) scale(.92);
+  }
+  45%{
+    transform:translate(-46vw,-13vh) rotate(-12deg) scale(1.02);
+  }
+  65%{
+    transform:translate(-69vw,1vh) rotate(-28deg) scale(.98);
+  }
+  84%{
+    transform:translate(-94vw,-10vh) rotate(-10deg) scale(.88);
+    opacity:1;
+  }
+  100%{
+    transform:translate(-124vw,-22vh) rotate(20deg) scale(.76);
+    opacity:0;
+  }
+}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(7px)}
+}
+
+@keyframes twinkle{
+  0%,100%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.25)}
+}
+
+@media(max-width:600px){
+  .contenido{
+    width:76vw;
+    padding:72px 4px 82px;
+  }
+
+  .ramo{
+    width:175px;
+    height:215px;
+  }
+
+  .ramo.sup-izq{left:-48px}
+  .ramo.sup-der{right:-48px}
+  .ramo.inf-izq{left:-50px}
+  .ramo.inf-der{right:-50px}
+}
+</style>
+</head>
+
+<body>
+
+<section class="invitacion">
+
+  <div class="ramo sup-izq" aria-hidden="true">
+    <span class="fg">❀</span><span class="fm">✿</span><span class="fp">❁</span>
+    <span class="leaf">❧</span><span class="fg">✿</span><span class="leaf">❧</span>
+    <span class="fm">❀</span><span class="leaf">❧</span><span class="fp">✿</span>
+    <span class="fm">❁</span><span class="leaf">❧</span><span class="fp">❀</span>
+    <span class="bud">✦</span><span class="leaf">❧</span>
+  </div>
+
+  <div class="ramo sup-der" aria-hidden="true">
+    <span class="fg">❀</span><span class="fm">✿</span><span class="fp">❁</span>
+    <span class="leaf">❧</span><span class="fg">✿</span><span class="leaf">❧</span>
+    <span class="fm">❀</span><span class="leaf">❧</span><span class="fp">✿</span>
+    <span class="fm">❁</span><span class="leaf">❧</span><span class="fp">❀</span>
+    <span class="bud">✦</span><span class="leaf">❧</span>
+  </div>
+
+  <div class="ramo inf-izq" aria-hidden="true">
+    <span class="fg">❀</span><span class="fm">✿</span><span class="fp">❁</span>
+    <span class="leaf">❧</span><span class="fg">✿</span><span class="leaf">❧</span>
+    <span class="fm">❀</span><span class="leaf">❧</span><span class="fp">✿</span>
+    <span class="fm">❁</span><span class="leaf">❧</span><span class="fp">❀</span>
+    <span class="bud">✦</span><span class="leaf">❧</span>
+  </div>
+
+  <div class="ramo inf-der" aria-hidden="true">
+    <span class="fg">❀</span><span class="fm">✿</span><span class="fp">❁</span>
+    <span class="leaf">❧</span><span class="fg">✿</span><span class="leaf">❧</span>
+    <span class="fm">❀</span><span class="leaf">❧</span><span class="fp">✿</span>
+    <span class="fm">❁</span><span class="leaf">❧</span><span class="fp">❀</span>
+    <span class="bud">✦</span><span class="leaf">❧</span>
+  </div>
+
+  <span class="blur-flower bf1">❀</span>
+  <span class="blur-flower bf2">✿</span>
+
+  <span class="butterfly b1">🦋</span>
+  <span class="butterfly b2">🦋</span>
+
+  <span class="spark s1">✦</span>
+  <span class="spark s2">✧</span>
+  <span class="spark s3">✦</span>
+
+  <div class="contenido">
+    <div class="frase">
+      <div class="honor">Tenemos el honor</div>
+      <div class="invitar">de invitarlos</div>
+      <div class="celebrar">a celebrar los</div>
+      <div class="xv">XV AÑOS</div>
+      <div class="de">de</div>
+    </div>
+
+    <div class="ornamento">✦</div>
+  </div>
+
+  <div class="scroll-cue">
+    <span class="arrow">⌄</span>
+  </div>
+
+</section>
+
+</body>
+</html>
