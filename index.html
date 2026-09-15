@@ -534,7 +534,7 @@
       <span>Creamos algo que vale la pena abrir.</span>
     </h2>
   </section>
-  <!-- CONTACTO -->
+    <!-- CONTACTO -->
   <section id="contacto">
     <div class="section-container reveal">
       <div class="contact-box">
@@ -542,22 +542,172 @@
           Gexaris Digital
         </div>
         <h2>
-          ¿Tienes una idea?
+          Cuéntanos tu idea.
         </h2>
         <p>
-          Cuéntanos qué quieres crear.
-          Podemos convertir una idea sencilla
-          en una experiencia digital lista para compartir.
+          ¿Necesitas una invitación digital, una página web
+          o tienes otra idea en mente? Envíanos los detalles
+          y nos pondremos en contacto contigo.
         </p>
-        <a
-          href="mailto:contacto@gexarisdigital.com"
-          class="button button-primary"
+        <form
+          action="https://formsubmit.co/netcentersantalucia@gmail.com"
+          method="POST"
+          class="contact-form"
         >
-          Hablemos
-        </a>
+          <!-- Configuración del correo -->
+          <input
+            type="hidden"
+            name="_subject"
+            value="Nueva solicitud - Gexaris Digital"
+          >
+          <input
+            type="hidden"
+            name="_captcha"
+            value="false"
+          >
+          <!-- Nombre -->
+          <div class="form-group">
+            <label for="nombre">
+              Tu nombre
+            </label>
+            <input
+              type="text"
+              id="nombre"
+              name="Nombre"
+              placeholder="Ej. María López"
+              required
+            >
+          </div>
+          <!-- Teléfono -->
+          <div class="form-group">
+            <label for="telefono">
+              Número de teléfono
+            </label>
+            <input
+              type="tel"
+              id="telefono"
+              name="Telefono"
+              placeholder="Ej. 817 555 1234"
+              required
+            >
+          </div>
+          <!-- Servicio -->
+          <div class="form-group">
+            <label for="servicio">
+              ¿Qué necesitas?
+            </label>
+            <select
+              id="servicio"
+              name="Servicio"
+              required
+            >
+              <option value="" disabled selected>
+                Selecciona una opción
+              </option>
+              <option value="Invitación digital">
+                Invitación digital
+              </option>
+              <option value="Página web">
+                Página web
+              </option>
+              <option value="Otro proyecto">
+                Otro proyecto
+              </option>
+            </select>
+          </div>
+          <!-- Mensaje -->
+          <div class="form-group">
+            <label for="mensaje">
+              Cuéntanos qué tienes en mente
+            </label>
+            <textarea
+              id="mensaje"
+              name="Mensaje"
+              rows="6"
+              placeholder="Ej. Quiero una invitación parecida a la de Almita y quisiera saber el precio..."
+              required
+            ></textarea>
+          </div>
+          <!-- Botón -->
+          <button
+            type="submit"
+            class="button button-primary submit-button"
+          >
+            Solicitar información →
+          </button>
+          <p class="form-note">
+            Al enviar tu solicitud podremos comunicarnos contigo
+            utilizando el número proporcionado.
+          </p>
+        </form>
       </div>
     </div>
   </section>
+
+Y además, dentro de <style>, justo antes de donde dice:
+
+/* FOOTER */
+
+pega este CSS:
+
+    /* ================================
+       FORMULARIO DE CONTACTO
+    ================================= */
+    .contact-form {
+      max-width: 650px;
+      margin: 45px auto 0;
+      text-align: left;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 9px;
+      color: #c9cede;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 16px 17px;
+      border: 1px solid rgba(255,255,255,.11);
+      border-radius: 12px;
+      background: rgba(255,255,255,.045);
+      color: white;
+      font-family: inherit;
+      font-size: 16px;
+      outline: none;
+      transition: .25s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #8994ff;
+      background: rgba(127,140,255,.07);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+    .form-group select option {
+      color: #111;
+    }
+    .submit-button {
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      margin-top: 5px;
+    }
+    .form-note {
+      margin: 18px auto 0 !important;
+      text-align: center;
+      font-size: 12px !important;
+      color: #687085 !important;
+    }
   <!-- FOOTER -->
   <footer>
     <div>
