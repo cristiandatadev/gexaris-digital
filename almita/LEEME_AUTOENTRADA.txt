@@ -1,6 +1,0 @@
-Cambio agregado:
-- Al tocar el sobre, se reproduce la animación normal.
-- Tras 3.2 segundos, la portada se desvanece.
-- La invitación entra automáticamente a la página 2.
-- Funciona tanto con música como con "Continuar sin música".
-- La flecha manual de la primera página fue ocultada porque ya no hace falta.
