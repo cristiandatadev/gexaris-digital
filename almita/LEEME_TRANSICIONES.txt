@@ -1,5 +1,0 @@
-Versión unida con transiciones:
-- Página 9 habilitada para interacción: el botón "Cómo llegar" vuelve a ser clickeable.
-- Cada sección entra con fade + desplazamiento suave + ligero zoom/blur.
-- Se conserva el scroll vertical en celular.
-- Se mantiene la navegación por flechas.

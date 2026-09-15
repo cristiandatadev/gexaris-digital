@@ -1,9 +1,0 @@
-TRANSICIÓN SUAVE CINEMATOGRÁFICA
-
-- Una escena por pantalla.
-- La escena actual se oscurece suavemente y hace un zoom mínimo.
-- La siguiente aparece simultáneamente con un desenfoque ligero que se enfoca.
-- Hay un resplandor lavanda muy discreto durante el cruce.
-- Duración aproximada: 0.8 segundos.
-- Funciona al deslizar, con mouse/trackpad, flechas y automáticamente tras abrir el sobre.
-- Las páginas 9 y 10 mantienen sus elementos interactivos.
