@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mis XV Almita</title>
+<style>
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#160b1c;
+  overscroll-behavior:none;
+}
+body{touch-action:none}
+
+#deck{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  background:#160b1c;
+}
+
+.slide{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100svh;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  background:#160b1c;
+}
+.slide.active{
+  opacity:1;
+  visibility:visible;
+}
+.slide iframe{
+  display:block;
+  width:100%;
+  height:100%;
+  border:0;
+  background:transparent;
+  pointer-events:none;
+}
+.slide.interactive.active iframe{pointer-events:auto}
+
+.next{
+  position:absolute;
+  z-index:50;
+  left:50%;
+  bottom:max(12px,env(safe-area-inset-bottom));
+  transform:translateX(-50%);
+  width:46px;
+  height:46px;
+  border:0;
+  border-radius:50%;
+  background:rgba(27,12,35,.40);
+  color:#fff;
+  font-size:31px;
+  line-height:40px;
+  cursor:pointer;
+  backdrop-filter:blur(5px);
+  box-shadow:0 5px 18px rgba(0,0,0,.16);
+  animation:bounce 2.2s ease-in-out infinite;
+}
+#slide-1 .next{display:none}
+@keyframes bounce{
+  0%,100%{transform:translate(-50%,0);opacity:.72}
+  50%{transform:translate(-50%,7px);opacity:1}
+}
+
+
+/* TRANSICIÓN SUAVE ENTRE ESCENAS */
+.slide{
+  transition:
+    opacity 1.12s ease,
+    transform 1.25s cubic-bezier(.22,.65,.25,1),
+    filter 1.12s ease;
+}
+.slide.active{
+  opacity:1;
+  visibility:visible;
+  transform:scale(1);
+  filter:blur(0);
+}
+.slide.outgoing{
+  opacity:0;
+  visibility:visible;
+  transform:scale(1.022);
+  filter:blur(1.8px) brightness(.78);
+}
+.slide.incoming{
+  opacity:0;
+  visibility:visible;
+  transform:scale(.992);
+  filter:blur(5px) brightness(.88);
+}
+
+#soft-glow{
+  position:fixed;
+  inset:0;
+  z-index:2147483646;
+  pointer-events:none;
+  opacity:0;
+  background:
+    radial-gradient(ellipse at center,
+      rgba(240,213,250,.26) 0%,
+      rgba(174,115,203,.13) 36%,
+      rgba(45,20,56,.08) 70%,
+      transparent 100%);
+}
+#soft-glow.play{
+  animation:softGlow 1.35s ease-in-out forwards;
+}
+@keyframes softGlow{
+  0%,100%{opacity:0}
+  48%{opacity:1}
+}
+
+@media (min-width:900px){
+  .slide iframe{
+    max-width:760px;
+    margin:0 auto;
+    box-shadow:0 0 70px rgba(0,0,0,.28);
+  }
+}
+
+.swipe-hint{
+  position:fixed;z-index:2147483644;left:50%;
+  bottom:max(68px,calc(env(safe-area-inset-bottom) + 68px));
+  transform:translateX(-50%);color:#fff;
+  font:600 14px/1.2 system-ui,-apple-system,Segoe UI,sans-serif;
+  letter-spacing:.04em;text-shadow:0 2px 8px rgba(0,0,0,.75);
+  pointer-events:none;opacity:0;transition:opacity .35s ease;
+  animation:hintMove 1.7s ease-in-out infinite;white-space:nowrap;
+}
+.swipe-hint.show{opacity:.92}
+@keyframes hintMove{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,7px)}}
+.progress{
+  position:fixed;z-index:2147483644;top:max(12px,calc(env(safe-area-inset-top) + 8px));
+  left:50%;transform:translateX(-50%);display:flex;gap:5px;pointer-events:none;
+}
+.progress i{display:block;width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.35);
+  box-shadow:0 1px 5px rgba(0,0,0,.35);transition:transform .3s ease,background .3s ease}
+.progress i.on{background:rgba(255,255,255,.95);transform:scale(1.45)}
+.maps-final{
+  position:absolute;z-index:80;left:50%;
+  bottom:max(42px,calc(env(safe-area-inset-bottom) + 42px));
+  transform:translateX(-50%);display:inline-flex;align-items:center;justify-content:center;
+  min-width:190px;padding:14px 22px;border-radius:999px;color:#fff;text-decoration:none;
+  font:600 16px/1 system-ui,-apple-system,Segoe UI,sans-serif;background:rgba(54,25,68,.72);
+  border:1px solid rgba(255,255,255,.34);box-shadow:0 8px 26px rgba(0,0,0,.24);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)
+}
+
+</style>
+</head>
+<body>
+
+<div id="deck">
+
+<section class="slide interactive" id="slide-1" aria-hidden="false">
+  <iframe src="index_almita_limpio.html" title="Sección 1" loading="eager"></iframe>
+  <button class="next" aria-label="Siguiente" data-next="1">⌄</button>
+</section>
+<section class="slide" id="slide-2" aria-hidden="true">
+  <iframe src="segunda_corregida.html" title="Sección 2" loading="eager"></iframe>
+  <button class="next" aria-label="Siguiente" data-next="2">⌄</button>
+</section>
+<section class="slide" id="slide-3" aria-hidden="true">
+  <iframe src="tercera_arco_floral_particulas.html" title="Sección 3" loading="lazy"></iframe>
+  <button class="next" aria-label="Siguiente" data-next="3">⌄</button>
+</section>
+<section class="slide" id="slide-4" aria-hidden="true">
+  <iframe src="cuarta_xv_anos_de.html" title="Sección 4" loading="lazy"></iframe>
+  <button class="next" aria-label="Siguiente" data-next="4">⌄</button>
+</section>
+<section class="slide" id="slide-5" aria-hidden="true">
+  <iframe src="quinta_almita_borde_negro.html" title="Sección 5" loading="lazy"></iframe>
+  <button class="next" aria-label="Siguiente" data-next="5">⌄</button>
+</section>
+<section class="slide" id="slide-6" aria-hidden="true">
+  <iframe src="sexta_final_almita_animada.html" title="Sección 6" loading="lazy"></iframe>
+  <button class="next" aria-label="Siguiente" data-next="6">⌄</button>
+</section>
+<section class="slide" id="slide-7" aria-hidden="true">
+  <iframe src="septima_mono_sin_fondo_texto.html" title="Sección 7" loading="lazy"></iframe>
+  <button class="next" aria-label="Siguiente" data-next="7">⌄</button>
+</section>
+<section class="slide" id="slide-8" aria-hidden="true">
+  <iframe src="pagina8_corregida_sin_texto_fondo.html" title="Sección 8" loading="lazy"></iframe>
+  <button class="next" aria-label="Siguiente" data-next="8">⌄</button>
+</section>
+<section class="slide interactive" id="slide-9" aria-hidden="true">
+  <iframe src="pagina10_lila_oscuro.html" title="Sección 10" loading="lazy"></iframe>
+  <button class="next" aria-label="Siguiente" data-next="10">⌄</button>
+</section>
+<section class="slide" id="slide-10" aria-hidden="true">
+  <iframe src="pagina11_te_esperamos_luna_respira.html" title="Sección 11" loading="lazy"></iframe>
+  
+</section>
+</div>
+
+<div id="swipe-hint" class="swipe-hint" aria-hidden="true">Desliza hacia abajo ↓</div>
+<div id="progress" class="progress" aria-hidden="true"></div>
+<div id="soft-glow" aria-hidden="true"></div>
+
+<script>
+const slides = [...document.querySelectorAll('.slide')];
+const glow = document.getElementById('soft-glow');
+const swipeHint = document.getElementById('swipe-hint');
+const progress = document.getElementById('progress');
+let hintTimer = null;
+slides.forEach((_,i)=>{const dot=document.createElement('i');if(i===0)dot.classList.add('on');progress.appendChild(dot);});
+function updateNavUI(index){
+  [...progress.children].forEach((d,i)=>d.classList.toggle('on',i===index));
+  clearTimeout(hintTimer); swipeHint.classList.remove('show');
+  if(index>0 && index<slides.length-2) hintTimer=setTimeout(()=>swipeHint.classList.add('show'),1400);
+}
+function hideHint(){swipeHint.classList.remove('show');clearTimeout(hintTimer);}
+let current = 0;
+let busy = false;
+let touchStartY = null;
+let lastWheel = 0;
+
+slides.forEach((s,i)=>{
+  s.classList.toggle('active', i === 0);
+  s.setAttribute('aria-hidden', i === 0 ? 'false' : 'true');
+});
+
+updateNavUI(0);
+
+function transitionTo(index){
+  if(busy || index < 0 || index >= slides.length || index === current) return;
+  hideHint(); updateNavUI(index);
+  busy = true;
+
+  const oldSlide = slides[current];
+  const newSlide = slides[index];
+
+  newSlide.classList.remove('active','outgoing');
+  newSlide.classList.add('incoming');
+  newSlide.setAttribute('aria-hidden','false');
+
+  glow.classList.remove('play');
+  void glow.offsetWidth;
+  glow.classList.add('play');
+
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{
+      oldSlide.classList.add('outgoing');
+      newSlide.classList.remove('incoming');
+      newSlide.classList.add('active');
+    });
+  });
+
+  setTimeout(()=>{
+    oldSlide.classList.remove('active','outgoing');
+    oldSlide.setAttribute('aria-hidden','true');
+    current = index;
+  }, 1180);
+
+  setTimeout(()=>{
+    glow.classList.remove('play');
+    busy = false;
+  }, 1320);
+}
+
+function nextSlide(){ transitionTo(current + 1); }
+function prevSlide(){ transitionTo(current - 1); }
+
+document.querySelectorAll('.next').forEach(btn=>{
+  btn.addEventListener('click', e=>{
+    e.preventDefault();
+    e.stopPropagation();
+    transitionTo(Number(btn.dataset.next));
+  });
+});
+
+window.addEventListener('wheel', e=>{
+  hideHint();
+  if(busy) return;
+  const now = Date.now();
+  if(now - lastWheel < 850 || Math.abs(e.deltaY) < 25) return;
+  lastWheel = now;
+  e.preventDefault();
+  if(e.deltaY > 0) nextSlide();
+  else prevSlide();
+}, {passive:false});
+
+window.addEventListener('touchstart', e=>{
+  hideHint();
+  if(e.touches.length === 1) touchStartY = e.touches[0].clientY;
+}, {passive:true});
+
+window.addEventListener('touchend', e=>{
+  if(touchStartY === null || busy) return;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  touchStartY = null;
+  if(Math.abs(dy) < 55) return;
+  if(dy < 0) nextSlide();
+  else prevSlide();
+}, {passive:true});
+
+window.addEventListener('message', e=>{
+  if(!e.data) return;
+  if(e.data.type === 'almita-next-from-envelope') transitionTo(1);
+  if(e.data.type === 'almita-slide-next') nextSlide();
+  if(e.data.type === 'almita-slide-prev') prevSlide();
+  if(e.data.type === 'almita-rsvp-confirmed') transitionTo(9);
+});
+</script>
+</body>
+</html>
