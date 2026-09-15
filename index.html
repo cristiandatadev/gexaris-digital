@@ -1,12 +1,592 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gexaris Digital</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#05070d">
+  <title>Gexaris Digital | Experiencias digitales</title>
+  <meta
+    name="description"
+    content="Gexaris Digital crea páginas web, experiencias digitales e invitaciones interactivas."
+  >
+  <style>
+    /* ================================
+       CONFIGURACIÓN GENERAL
+    ================================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: #05070d;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    /* ================================
+       FONDO
+    ================================= */
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(81, 98, 255, 0.18), transparent 35%),
+        radial-gradient(circle at 80% 70%, rgba(0, 209, 255, 0.10), transparent 35%),
+        #05070d;
+    }
+    .grid {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 55px 55px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+    }
+    /* ================================
+       NAVEGACIÓN
+    ================================= */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 7%;
+      background: rgba(5, 7, 13, 0.65);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      z-index: 1000;
+    }
+    .logo {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: 3px;
+    }
+    .logo span {
+      color: #7f8cff;
+    }
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      font-size: 14px;
+      color: #aeb5c8;
+    }
+    .nav-links a {
+      transition: .25s;
+    }
+    .nav-links a:hover {
+      color: white;
+    }
+    /* ================================
+       HERO
+    ================================= */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 7% 70px;
+      text-align: center;
+    }
+    .hero-content {
+      max-width: 950px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 8px 16px;
+      border: 1px solid rgba(127,140,255,.35);
+      border-radius: 100px;
+      color: #aab2ff;
+      background: rgba(127,140,255,.08);
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+    .hero h1 {
+      font-size: clamp(54px, 11vw, 120px);
+      line-height: .92;
+      font-weight: 900;
+      letter-spacing: -5px;
+      margin-bottom: 30px;
+    }
+    .hero h1 span {
+      display: block;
+      background: linear-gradient(
+        90deg,
+        #ffffff,
+        #8994ff,
+        #5ee7ff
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero p {
+      max-width: 680px;
+      margin: 0 auto 40px;
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.7;
+      color: #aeb5c8;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 170px;
+      padding: 15px 25px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: .3s;
+    }
+    .button-primary {
+      background: white;
+      color: #070912;
+    }
+    .button-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(255,255,255,.15);
+    }
+    .button-secondary {
+      border: 1px solid rgba(255,255,255,.15);
+      color: white;
+      background: rgba(255,255,255,.03);
+    }
+    .button-secondary:hover {
+      background: rgba(255,255,255,.08);
+      transform: translateY(-3px);
+    }
+    /* ================================
+       SECCIONES
+    ================================= */
+    section {
+      padding: 110px 7%;
+    }
+    .section-container {
+      max-width: 1200px;
+      margin: auto;
+    }
+    .eyebrow {
+      color: #8994ff;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+    .section-title {
+      font-size: clamp(35px, 6vw, 65px);
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 25px;
+    }
+    .section-description {
+      max-width: 650px;
+      color: #939bad;
+      line-height: 1.8;
+      font-size: 17px;
+    }
+    /* ================================
+       SERVICIOS
+    ================================= */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 55px;
+    }
+    .service-card {
+      min-height: 280px;
+      padding: 35px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 20px;
+      background: rgba(255,255,255,.025);
+      transition: .35s;
+    }
+    .service-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(127,140,255,.4);
+      background: rgba(127,140,255,.05);
+    }
+    .service-number {
+      color: #70798f;
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 70px;
+    }
+    .service-card h3 {
+      font-size: 23px;
+      margin-bottom: 15px;
+    }
+    .service-card p {
+      color: #939bad;
+      line-height: 1.7;
+    }
+    /* ================================
+       PROYECTOS
+    ================================= */
+    .project {
+      margin-top: 55px;
+      min-height: 500px;
+      display: flex;
+      align-items: flex-end;
+      padding: 55px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.1);
+      overflow: hidden;
+      position: relative;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(197,156,255,.35), transparent 30%),
+        radial-gradient(circle at 20% 80%, rgba(127,140,255,.22), transparent 35%),
+        linear-gradient(135deg, #121424, #090b13);
+    }
+    .project::before {
+      content: "XV";
+      position: absolute;
+      right: 6%;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: Georgia, serif;
+      font-size: clamp(150px, 30vw, 350px);
+      color: rgba(255,255,255,.035);
+      line-height: 1;
+    }
+    .project-content {
+      position: relative;
+      z-index: 2;
+      max-width: 560px;
+    }
+    .project-tag {
+      display: inline-block;
+      margin-bottom: 15px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #c9b6ff;
+    }
+    .project h3 {
+      font-family: Georgia, serif;
+      font-size: clamp(40px, 7vw, 70px);
+      margin-bottom: 15px;
+    }
+    .project p {
+      color: #b8bdd0;
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+    /* ================================
+       MENSAJE CENTRAL
+    ================================= */
+    .statement {
+      padding-top: 150px;
+      padding-bottom: 150px;
+      text-align: center;
+    }
+    .statement h2 {
+      max-width: 950px;
+      margin: auto;
+      font-size: clamp(38px, 7vw, 80px);
+      line-height: 1.1;
+      letter-spacing: -3px;
+    }
+    .statement span {
+      color: #747d93;
+    }
+    /* ================================
+       CONTACTO
+    ================================= */
+    .contact-box {
+      padding: 70px 50px;
+      text-align: center;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(circle at 50% 120%, rgba(127,140,255,.25), transparent 45%),
+        rgba(255,255,255,.025);
+    }
+    .contact-box h2 {
+      font-size: clamp(38px, 6vw, 65px);
+      margin-bottom: 20px;
+    }
+    .contact-box p {
+      color: #9ba3b7;
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+    /* ================================
+       FOOTER
+    ================================= */
+    footer {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 7% 50px;
+      display: flex;
+      justify-content: space-between;
+      color: #687085;
+      font-size: 13px;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+    /* ================================
+       ANIMACIONES
+    ================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition:
+        opacity .8s ease,
+        transform .8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* ================================
+       CELULAR
+    ================================= */
+    @media (max-width: 800px) {
+      nav {
+        padding: 18px 6%;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero {
+        padding-left: 6%;
+        padding-right: 6%;
+      }
+      .hero h1 {
+        letter-spacing: -3px;
+      }
+      section {
+        padding: 85px 6%;
+      }
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      .service-card {
+        min-height: 230px;
+      }
+      .service-number {
+        margin-bottom: 45px;
+      }
+      .project {
+        min-height: 470px;
+        padding: 35px 25px;
+      }
+      .contact-box {
+        padding: 55px 25px;
+      }
+      footer {
+        flex-direction: column;
+        gap: 10px;
+        padding-left: 6%;
+        padding-right: 6%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Gexaris Digital</h1>
-    <p>Estamos construyendo algo grande.</p>
+  <div class="background"></div>
+  <div class="grid"></div>
+  <!-- NAVEGACIÓN -->
+  <nav>
+    <a href="#" class="logo">
+      GEXARIS<span>•</span>DIGITAL
+    </a>
+    <div class="nav-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </nav>
+  <!-- PORTADA -->
+  <main class="hero">
+    <div class="hero-content">
+      <div class="badge">
+        Diseño · Desarrollo · Experiencias
+      </div>
+      <h1>
+        Ideas que toman
+        <span>forma digital.</span>
+      </h1>
+      <p>
+        Diseñamos y desarrollamos experiencias digitales
+        modernas, funcionales y creadas para dejar una impresión.
+      </p>
+      <div class="buttons">
+        <a href="#proyectos" class="button button-primary">
+          Ver proyectos
+        </a>
+        <a href="#servicios" class="button button-secondary">
+          Qué hacemos
+        </a>
+      </div>
+    </div>
+  </main>
+  <!-- SERVICIOS -->
+  <section id="servicios">
+    <div class="section-container reveal">
+      <div class="eyebrow">
+        Lo que hacemos
+      </div>
+      <h2 class="section-title">
+        Construimos para la web.
+      </h2>
+      <p class="section-description">
+        Desde una idea hasta una experiencia publicada.
+        Combinamos diseño, desarrollo y tecnología para crear
+        productos digitales que se sienten únicos.
+      </p>
+      <div class="services-grid">
+        <article class="service-card">
+          <div class="service-number">01</div>
+          <h3>Páginas web</h3>
+          <p>
+            Sitios modernos, responsivos y diseñados
+            para funcionar correctamente en teléfono,
+            tablet y computadora.
+          </p>
+        </article>
+        <article class="service-card">
+          <div class="service-number">02</div>
+          <h3>Experiencias digitales</h3>
+          <p>
+            Interfaces con movimiento, interacción
+            y detalles visuales que convierten una
+            página en una experiencia.
+          </p>
+        </article>
+        <article class="service-card">
+          <div class="service-number">03</div>
+          <h3>Invitaciones digitales</h3>
+          <p>
+            Invitaciones web personalizadas con
+            animaciones, música, ubicación,
+            confirmación de asistencia y más.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <!-- PROYECTOS -->
+  <section id="proyectos">
+    <div class="section-container reveal">
+      <div class="eyebrow">
+        Trabajo seleccionado
+      </div>
+      <h2 class="section-title">
+        Proyectos.
+      </h2>
+      <p class="section-description">
+        Cada proyecto comienza con una idea.
+        Nuestro trabajo es convertirla en algo que pueda verse,
+        sentirse y compartirse.
+      </p>
+      <article class="project">
+        <div class="project-content">
+          <div class="project-tag">
+            Experiencia web · Invitación digital
+          </div>
+          <h3>
+            Mis XV Almita
+          </h3>
+          <p>
+            Una invitación digital interactiva creada
+            como una experiencia completa para celebrar
+            un momento inolvidable.
+          </p>
+          <a
+            href="/almita/"
+            class="button button-primary"
+          >
+            Ver proyecto →
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+  <!-- FRASE -->
+  <section class="statement reveal">
+    <h2>
+      No hacemos solamente páginas.
+      <span>Creamos algo que vale la pena abrir.</span>
+    </h2>
+  </section>
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <div class="section-container reveal">
+      <div class="contact-box">
+        <div class="eyebrow">
+          Gexaris Digital
+        </div>
+        <h2>
+          ¿Tienes una idea?
+        </h2>
+        <p>
+          Cuéntanos qué quieres crear.
+          Podemos convertir una idea sencilla
+          en una experiencia digital lista para compartir.
+        </p>
+        <a
+          href="mailto:contacto@gexarisdigital.com"
+          class="button button-primary"
+        >
+          Hablemos
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      © 2026 Gexaris Digital
+    </div>
+    <div>
+      Diseñado y desarrollado por Gexaris Digital
+    </div>
+  </footer>
+  <script>
+    /* =================================
+       ANIMACIÓN AL HACER SCROLL
+    ================================= */
+    const elements = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      {
+        threshold: 0.15
+      }
+    );
+    elements.forEach((element) => {
+      observer.observe(element);
+    });
+  </script>
 </body>
 </html>
