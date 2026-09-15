@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mis XV - Tercera Sección</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Great+Vibes&display=swap');
+
+:root{--bg:#17091d;--lavender:#d8b7e2;--gold:#e6c67a;--white:#fff8ff}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;min-height:100%;background:var(--bg);color:white}
+body{font-family:'Cormorant Garamond',serif;overflow-x:hidden}
+
+.historia{
+ min-height:100svh;position:relative;display:flex;align-items:center;justify-content:center;
+ overflow:hidden;padding:40px 22px;
+ background:
+ radial-gradient(circle at 50% 34%,rgba(225,190,239,.18),transparent 26%),
+ radial-gradient(circle at 50% 78%,rgba(230,198,122,.08),transparent 28%),
+ linear-gradient(180deg,#140819 0%,#2b1037 52%,#120716 100%);
+}
+
+.arco{
+ position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+ width:min(84vw,620px);height:88svh;border:1px solid rgba(230,198,122,.52);
+ border-bottom:none;border-radius:50% 50% 0 0 / 28% 28% 0 0;
+ box-shadow:inset 0 0 35px rgba(230,198,122,.05),0 0 18px rgba(230,198,122,.14),0 0 48px rgba(207,168,219,.14);
+ z-index:1;
+}
+.arco::before{
+ content:"";position:absolute;inset:12px 14px 0;border:1px solid rgba(216,183,226,.18);
+ border-bottom:none;border-radius:50% 50% 0 0 / 28% 28% 0 0;
+}
+
+.ramo{position:absolute;z-index:2;width:clamp(88px,15vw,125px);height:66%;top:20%;pointer-events:none}
+.ramo-izq{left:calc(50% - min(42vw,310px) - 42px)}
+.ramo-der{right:calc(50% - min(42vw,310px) - 42px);transform:scaleX(-1)}
+.ramo span{position:absolute;display:block;line-height:1;text-shadow:0 0 8px rgba(235,198,255,.48),0 0 17px rgba(230,198,122,.20)}
+.flor-grande{font-size:clamp(34px,7vw,52px);color:#e2bee9}
+.flor-mediana{font-size:clamp(27px,5.5vw,40px);color:#cfa8db}
+.flor-pequena{font-size:clamp(19px,4vw,29px);color:#f0d8f4}
+.hoja{font-size:clamp(25px,5vw,37px);color:#9f80aa}
+.dorado{font-size:clamp(15px,3vw,22px);color:var(--gold)}
+.ramo span:nth-child(1){top:0;left:34%}.ramo span:nth-child(2){top:5%;left:5%}
+.ramo span:nth-child(3){top:12%;left:52%}.ramo span:nth-child(4){top:18%;left:17%;transform:rotate(-25deg)}
+.ramo span:nth-child(5){top:23%;left:46%}.ramo span:nth-child(6){top:29%;left:0}
+.ramo span:nth-child(7){top:34%;left:56%;transform:rotate(28deg)}.ramo span:nth-child(8){top:39%;left:24%}
+.ramo span:nth-child(9){top:46%;left:52%}.ramo span:nth-child(10){top:51%;left:5%;transform:rotate(-28deg)}
+.ramo span:nth-child(11){top:57%;left:38%}.ramo span:nth-child(12){top:64%;left:0}
+.ramo span:nth-child(13){top:69%;left:55%;transform:rotate(25deg)}.ramo span:nth-child(14){top:75%;left:20%}
+.ramo span:nth-child(15){top:82%;left:48%}.ramo span:nth-child(16){top:89%;left:8%;transform:rotate(-25deg)}
+.ramo span:nth-child(17){top:94%;left:38%}
+
+.corona-floral{position:absolute;z-index:2;top:9%;left:50%;transform:translateX(-50%);width:min(72vw,520px);height:170px;pointer-events:none}
+.corona-floral span{position:absolute;line-height:1;text-shadow:0 0 9px rgba(235,198,255,.5),0 0 18px rgba(230,198,122,.18)}
+.corona-floral span:nth-child(1){left:5%;top:70%;font-size:32px;color:#cfa8db;transform:rotate(-25deg)}
+.corona-floral span:nth-child(2){left:15%;top:42%;font-size:42px;color:#e3c0ea}
+.corona-floral span:nth-child(3){left:27%;top:20%;font-size:27px;color:#f0d8f4}
+.corona-floral span:nth-child(4){left:38%;top:7%;font-size:39px;color:#d5acdf}
+.corona-floral span:nth-child(5){left:48%;top:0;font-size:48px;color:#ead0ef}
+.corona-floral span:nth-child(6){right:36%;top:8%;font-size:34px;color:#cfa8db}
+.corona-floral span:nth-child(7){right:25%;top:22%;font-size:29px;color:#f0d8f4}
+.corona-floral span:nth-child(8){right:13%;top:43%;font-size:43px;color:#d8b7e2}
+.corona-floral span:nth-child(9){right:4%;top:70%;font-size:31px;color:#cfa8db}
+.corona-floral span:nth-child(10){left:21%;top:63%;font-size:23px;color:#9f80aa;transform:rotate(-35deg)}
+.corona-floral span:nth-child(11){right:20%;top:64%;font-size:23px;color:#9f80aa;transform:rotate(35deg)}
+.corona-floral span:nth-child(12){left:50%;top:52%;font-size:17px;color:var(--gold)}
+
+.contenido-historia{position:relative;z-index:5;width:min(82vw,650px);text-align:center;padding:110px 24px 80px}
+.corona{font-size:clamp(32px,7vw,54px);color:var(--gold);margin-bottom:24px;text-shadow:0 0 18px rgba(230,198,122,.35);animation:coronaGlow 6s ease-in-out infinite}
+.frase{margin:0;font-family:'Great Vibes',cursive;font-size:clamp(48px,10vw,88px);font-weight:400;line-height:1.08;color:var(--white);opacity:0;transform:translateY(24px);animation:aparecer 2.8s ease forwards .4s;text-shadow:0 0 7px rgba(255,255,255,.28),0 0 18px rgba(216,183,226,.24)}
+.princesa{color:#f6e3ff;text-shadow:0 0 8px rgba(255,255,255,.45),0 0 20px rgba(220,177,239,.46),0 0 34px rgba(230,198,122,.18)}
+.separador{width:150px;height:1px;margin:34px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;animation:aparecer 2.2s ease forwards 1.8s}
+.sutil{margin:22px auto 0;max-width:520px;font-size:clamp(17px,3.8vw,24px);font-style:italic;color:#dccbe4;opacity:0;animation:aparecer 2.2s ease forwards 2.3s}
+
+.spark{
+ position:absolute;z-index:3;color:#f3d993;opacity:0;
+ text-shadow:0 0 12px rgba(255,220,145,.8);
+ animation:twinkle 4s ease-in-out infinite;
+}
+.s1{top:23%;left:11%;font-size:18px}.s2{top:29%;right:10%;font-size:23px;animation-delay:1s}
+.s3{bottom:24%;left:12%;font-size:17px;animation-delay:1.8s}.s4{bottom:18%;right:13%;font-size:20px;animation-delay:2.5s}
+
+/* Partículas que caen lentamente */
+.caida{
+ position:absolute;
+ top:-12%;
+ z-index:4;
+ color:#f3d993;
+ opacity:0;
+ text-shadow:0 0 10px rgba(255,220,145,.7);
+ animation:caer linear infinite;
+ pointer-events:none;
+}
+.c1{left:14%;font-size:15px;animation-duration:12s;animation-delay:-2s}
+.c2{left:31%;font-size:11px;animation-duration:15s;animation-delay:-7s}
+.c3{left:51%;font-size:14px;animation-duration:13s;animation-delay:-5s}
+.c4{left:69%;font-size:10px;animation-duration:16s;animation-delay:-10s}
+.c5{left:86%;font-size:16px;animation-duration:14s;animation-delay:-4s}
+
+@keyframes aparecer{to{opacity:1;transform:translateY(0)}}
+@keyframes coronaGlow{
+ 0%,100%{opacity:.65;text-shadow:0 0 8px rgba(230,198,122,.20)}
+ 50%{opacity:1;text-shadow:0 0 14px rgba(230,198,122,.55),0 0 30px rgba(230,198,122,.28)}
+}
+@keyframes twinkle{
+ 0%,100%{opacity:0;transform:scale(.55)}
+ 50%{opacity:1;transform:scale(1.25)}
+}
+@keyframes caer{
+ 0%{transform:translateY(-10vh) rotate(0deg);opacity:0}
+ 10%{opacity:.5}
+ 50%{opacity:.8}
+ 100%{transform:translateY(125vh) rotate(180deg);opacity:0}
+}
+
+@media(max-width:600px){
+ .contenido-historia{width:78vw;padding:105px 8px 65px}
+ .arco{width:86vw;height:88svh}
+ .ramo{width:82px;height:62%;top:24%}
+ .ramo-izq{left:1%}.ramo-der{right:1%}
+ .corona-floral{width:78vw;top:10%;transform:translateX(-50%) scale(.88)}
+}
+</style>
+</head>
+<body>
+<section class="historia">
+ <div class="arco"></div>
+
+ <div class="corona-floral" aria-hidden="true">
+  <span>❧</span><span>❀</span><span>❁</span><span>✿</span><span>❀</span><span>✿</span>
+  <span>❁</span><span>❀</span><span>❧</span><span>❧</span><span>❧</span><span>✦</span>
+ </div>
+
+ <div class="ramo ramo-izq" aria-hidden="true">
+  <span class="flor-grande">❀</span><span class="flor-mediana">✿</span><span class="flor-pequena">❁</span>
+  <span class="hoja">❧</span><span class="flor-mediana">❀</span><span class="flor-grande">✿</span>
+  <span class="hoja">❧</span><span class="flor-pequena">❁</span><span class="flor-mediana">❀</span>
+  <span class="hoja">❧</span><span class="flor-grande">✿</span><span class="flor-pequena">❀</span>
+  <span class="hoja">❧</span><span class="flor-mediana">✿</span><span class="flor-grande">❀</span>
+  <span class="hoja">❧</span><span class="dorado">✦</span>
+ </div>
+
+ <div class="ramo ramo-der" aria-hidden="true">
+  <span class="flor-grande">❀</span><span class="flor-mediana">✿</span><span class="flor-pequena">❁</span>
+  <span class="hoja">❧</span><span class="flor-mediana">❀</span><span class="flor-grande">✿</span>
+  <span class="hoja">❧</span><span class="flor-pequena">❁</span><span class="flor-mediana">❀</span>
+  <span class="hoja">❧</span><span class="flor-grande">✿</span><span class="flor-pequena">❀</span>
+  <span class="hoja">❧</span><span class="flor-mediana">✿</span><span class="flor-grande">❀</span>
+  <span class="hoja">❧</span><span class="dorado">✦</span>
+ </div>
+
+ <span class="spark s1">✦</span><span class="spark s2">✧</span>
+ <span class="spark s3">✦</span><span class="spark s4">✧</span>
+
+ <span class="caida c1">✦</span>
+ <span class="caida c2">✧</span>
+ <span class="caida c3">✦</span>
+ <span class="caida c4">✧</span>
+ <span class="caida c5">✦</span>
+
+ <div class="contenido-historia">
+  <div class="corona">♛</div>
+  <h1 class="frase">Hace 15 años nació una hermosa <span class="princesa">princesa…</span></h1>
+  <div class="separador"></div>
+  <p class="sutil">Y desde entonces, comenzó a escribirse una historia llena de sueños.</p>
+ </div>
+</section>
+</body>
+</html>
