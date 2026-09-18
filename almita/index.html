@@ -157,6 +157,73 @@ body{touch-action:none}
 }
 
 
+.date-card{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:32px 24px;
+  color:#fff;
+  background:
+    radial-gradient(circle at 50% 38%,
+      rgba(181,126,207,.34),
+      transparent 34%),
+    linear-gradient(180deg,
+      #2d1639 0%,
+      #5a3268 48%,
+      #24112e 100%);
+  font-family:Georgia,"Times New Roman",serif;
+}
+
+.date-kicker{
+  margin:8px 0 20px;
+  font-size:clamp(28px,8vw,48px);
+  font-style:italic;
+  text-shadow:0 3px 16px rgba(0,0,0,.35);
+}
+
+.date-card h2{
+  margin:0;
+  font-size:clamp(18px,5vw,27px);
+  letter-spacing:.28em;
+}
+
+.date-main{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin:12px 0 4px;
+}
+
+.date-main span{
+  font-size:clamp(82px,25vw,145px);
+  line-height:.9;
+}
+
+.date-main strong{
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  font-size:clamp(17px,4.5vw,25px);
+  letter-spacing:.18em;
+}
+
+.date-time{
+  margin:20px 0 0;
+  font-size:clamp(24px,7vw,38px);
+  font-weight:600;
+}
+
+.date-sparkle{
+  font-size:32px;
+}
+
+.date-heart{
+  font-size:28px;
+  margin:20px 0 0;
+}
 .final-maps-parent{position:fixed;z-index:2147483647;left:50%;bottom:max(114px,calc(env(safe-area-inset-bottom) + 114px));transform:translateX(-50%);display:none;align-items:center;justify-content:center;min-width:190px;padding:14px 24px;border-radius:999px;color:#fff;text-decoration:none;font:600 16px/1 system-ui,-apple-system,"Segoe UI",sans-serif;background:rgba(55,25,70,.86);border:1px solid rgba(255,255,255,.45);box-shadow:0 8px 28px rgba(0,0,0,.30);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);pointer-events:auto}.final-maps-parent.show{display:flex}
 
 </style>
@@ -196,6 +263,25 @@ body{touch-action:none}
 <section class="slide" id="slide-8" aria-hidden="true">
   <iframe src="pagina8_corregida_sin_texto_fondo.html" title="Sección 8" loading="lazy"></iframe>
   <button class="next" aria-label="Siguiente" data-next="8">⌄</button>
+</section>
+<section class="slide" id="slide-date" aria-hidden="true">
+  <div class="date-card">
+    <div class="date-sparkle">✨</div>
+
+    <p class="date-kicker">No olvides la fecha</p>
+
+    <h2>SÁBADO</h2>
+
+    <div class="date-main">
+      <span>03</span>
+      <strong>OCTUBRE</strong>
+    </div>
+
+    <p class="date-time">🕔 5:00 p. m.</p>
+    <p class="date-heart">💜</p>
+  </div>
+
+  <button class="next" aria-label="Siguiente" data-next="9">⌄</button>
 </section>
 <section class="slide interactive" id="slide-9" aria-hidden="true">
   <iframe src="pagina10_lila_oscuro.html" title="Sección 10" loading="lazy"></iframe>
