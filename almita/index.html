@@ -156,74 +156,31 @@ body{touch-action:none}
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)
 }
 
-
 .date-card{
-  position:absolute;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:32px 24px;
-  color:#fff;
-  background:
-    radial-gradient(circle at 50% 38%,
-      rgba(181,126,207,.34),
-      transparent 34%),
-    linear-gradient(180deg,
-      #2d1639 0%,
-      #5a3268 48%,
-      #24112e 100%);
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:28px 20px;color:#fff;
+  background:radial-gradient(circle at 50% 38%,rgba(181,126,207,.38),transparent 35%),linear-gradient(180deg,#2d1639 0%,#5a3268 48%,#24112e 100%);
   font-family:Georgia,"Times New Roman",serif;
 }
+.date-sparkle{font-size:30px;animation:dateTwinkle 2.4s ease-in-out infinite}
+.date-kicker{margin:6px 0 16px;font-size:clamp(28px,8vw,48px);font-style:italic;text-shadow:0 3px 16px rgba(0,0,0,.35)}
+.date-card h2{margin:0;font-size:clamp(18px,5vw,27px);letter-spacing:.28em}
+.date-main{display:flex;align-items:center;gap:18px;margin:10px 0 2px}
+.date-main span{font-size:clamp(76px,23vw,130px);line-height:.9}
+.date-main strong{writing-mode:vertical-rl;transform:rotate(180deg);font-size:clamp(17px,4.5vw,25px);letter-spacing:.18em}
+.date-time{margin:15px 0 0;font-size:clamp(23px,6.5vw,36px);font-weight:600}
+.date-heart{font-size:27px;margin:10px 0 9px;animation:heartBeat 2s ease-in-out infinite}
+.date-countdown-label{margin:0 0 8px;font-size:clamp(15px,3.8vw,20px);letter-spacing:.04em}
+.date-countdown{display:flex;justify-content:center;gap:7px}
+.date-countdown-box{width:clamp(61px,17vw,82px);padding:8px 3px 7px;border:1px solid rgba(255,255,255,.55);border-radius:13px;background:rgba(38,16,48,.48);box-shadow:0 7px 20px rgba(0,0,0,.23),inset 0 1px rgba(255,255,255,.25);backdrop-filter:blur(5px)}
+.date-countdown-box span{display:block;font-size:clamp(21px,5.5vw,30px);font-weight:700;line-height:1}
+.date-countdown-box small{display:block;margin-top:4px;font:600 clamp(9px,2.2vw,11px)/1 system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase}
+.date-countdown-message{margin:8px 0 0;font-size:clamp(20px,5vw,28px);font-style:italic}
+@keyframes dateTwinkle{0%,100%{opacity:.45;transform:scale(.8)}50%{opacity:1;transform:scale(1.18);filter:drop-shadow(0 0 9px #fff)}}
+@keyframes heartBeat{0%,100%{transform:scale(1)}50%{transform:scale(1.16);filter:drop-shadow(0 0 9px #dca8f0)}}
 
-.date-kicker{
-  margin:8px 0 20px;
-  font-size:clamp(28px,8vw,48px);
-  font-style:italic;
-  text-shadow:0 3px 16px rgba(0,0,0,.35);
-}
 
-.date-card h2{
-  margin:0;
-  font-size:clamp(18px,5vw,27px);
-  letter-spacing:.28em;
-}
-
-.date-main{
-  display:flex;
-  align-items:center;
-  gap:18px;
-  margin:12px 0 4px;
-}
-
-.date-main span{
-  font-size:clamp(82px,25vw,145px);
-  line-height:.9;
-}
-
-.date-main strong{
-  writing-mode:vertical-rl;
-  transform:rotate(180deg);
-  font-size:clamp(17px,4.5vw,25px);
-  letter-spacing:.18em;
-}
-
-.date-time{
-  margin:20px 0 0;
-  font-size:clamp(24px,7vw,38px);
-  font-weight:600;
-}
-
-.date-sparkle{
-  font-size:32px;
-}
-
-.date-heart{
-  font-size:28px;
-  margin:20px 0 0;
-}
 .final-maps-parent{position:fixed;z-index:2147483647;left:50%;bottom:max(114px,calc(env(safe-area-inset-bottom) + 114px));transform:translateX(-50%);display:none;align-items:center;justify-content:center;min-width:190px;padding:14px 24px;border-radius:999px;color:#fff;text-decoration:none;font:600 16px/1 system-ui,-apple-system,"Segoe UI",sans-serif;background:rgba(55,25,70,.86);border:1px solid rgba(255,255,255,.45);box-shadow:0 8px 28px rgba(0,0,0,.30);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);pointer-events:auto}.final-maps-parent.show{display:flex}
 
 </style>
@@ -267,24 +224,20 @@ body{touch-action:none}
 <section class="slide" id="slide-date" aria-hidden="true">
   <div class="date-card">
     <div class="date-sparkle">✨</div>
-
     <p class="date-kicker">No olvides la fecha</p>
-
     <h2>SÁBADO</h2>
-
-    <div class="date-main">
-      <span>03</span>
-      <strong>OCTUBRE</strong>
-    </div>
-
+    <div class="date-main"><span>03</span><strong>OCTUBRE</strong></div>
     <p class="date-time">🕔 5:00 p. m.</p>
     <p class="date-heart">💜</p>
+    <p class="date-countdown-label">Faltan para mis XV años ✨</p>
+    <div class="date-countdown" id="date-countdown">
+      <div class="date-countdown-box"><span id="date-days">00</span><small>Días</small></div>
+      <div class="date-countdown-box"><span id="date-hours">00</span><small>Horas</small></div>
+      <div class="date-countdown-box"><span id="date-minutes">00</span><small>Minutos</small></div>
+      <div class="date-countdown-box"><span id="date-seconds">00</span><small>Segundos</small></div>
+    </div>
+    <p class="date-countdown-message" id="date-countdown-message"></p>
   </div>
-
-  <button class="next" aria-label="Siguiente" data-next="9">⌄</button>
-</section>
-<section class="slide interactive" id="slide-9" aria-hidden="true">
-  <iframe src="pagina9_estilo_pagina4_zabdi.html" title="Sección 9: fecha y lugar" loading="lazy"></iframe>
   <button class="next" aria-label="Siguiente" data-next="9">⌄</button>
 </section>
 <section class="slide interactive" id="slide-10" aria-hidden="true">
@@ -303,6 +256,22 @@ body{touch-action:none}
 <div id="soft-glow" aria-hidden="true"></div>
 
 <script>
+(function iniciarCuentaRegresivaFecha(){
+  const fechaEvento=new Date('2026-10-03T17:00:00-06:00').getTime();
+  const contador=document.getElementById('date-countdown');
+  const mensaje=document.getElementById('date-countdown-message');
+  function actualizar(){
+    const restante=fechaEvento-Date.now();
+    if(restante<=0){contador.style.display='none';mensaje.textContent='¡Hoy es el gran día! 👑✨';return}
+    const dia=86400000,hora=3600000,minuto=60000;
+    document.getElementById('date-days').textContent=String(Math.floor(restante/dia)).padStart(2,'0');
+    document.getElementById('date-hours').textContent=String(Math.floor((restante%dia)/hora)).padStart(2,'0');
+    document.getElementById('date-minutes').textContent=String(Math.floor((restante%hora)/minuto)).padStart(2,'0');
+    document.getElementById('date-seconds').textContent=String(Math.floor((restante%minuto)/1000)).padStart(2,'0');
+  }
+  actualizar();setInterval(actualizar,1000);
+})();
+
 const slides = [...document.querySelectorAll('.slide')];
 const glow = document.getElementById('soft-glow');
 const finalMapsParent = document.getElementById('final-maps-parent');
