@@ -455,109 +455,51 @@ textarea{
     <div class="divisor">✦</div>
 
     <button class="abrir-form" id="abrirForm">
-      Confirmar ahora ❯
+      Ver aviso ❯
     </button>
   </div>
 
 </section>
 
 <div class="modal" id="modalForm" aria-hidden="true">
-  <div class="panel">
+  <div class="panel" style="max-width:520px;text-align:center;">
     <button class="cerrar" id="cerrarForm" aria-label="Cerrar">×</button>
-    <h2>Confirma tu asistencia</h2>
-    <p class="intro">Completa tus datos para registrar tu respuesta.</p>
-
-    <form id="rsvpForm" novalidate>
-      <div class="campo">
-        <label class="titulo-campo" for="nombre">Nombre completo *</label>
-        <input id="nombre" name="nombre" type="text" placeholder="Escribe tu nombre" required>
-      </div>
-
-      <div class="campo">
-        <label class="titulo-campo" for="telefono">Número de teléfono *</label>
-        <div class="telefono">
-          <span class="codigo">+502</span>
-          <input id="telefono" name="telefono" type="tel" inputmode="tel" placeholder="5555 5555" autocomplete="tel" required>
-        </div>
-      </div>
-
-      <div class="campo">
-        <label class="titulo-campo">¿Nos acompañas? *</label>
-        <div class="opciones">
-          <div class="opcion"><input id="si" type="radio" name="asistencia" value="Sí" required><label for="si">Sí</label></div>
-          <div class="opcion"><input id="no" type="radio" name="asistencia" value="No" required><label for="no">No</label></div>
-        </div>
-      </div>
-
-      <div class="campo" id="campoPersonas">
-        <label class="titulo-campo" for="personas">Número de personas *</label>
-        <input id="personas" name="personas" type="number" min="1" max="10" placeholder="¿Cuántas personas asistirán?" required>
-      </div>
-
-      <div class="campo">
-        <label class="titulo-campo" for="mensaje">Mensaje (opcional)</label>
-        <textarea id="mensaje" name="mensaje" placeholder="Déjanos un mensaje..."></textarea>
-      </div>
-
-      <button class="enviar" type="submit" id="botonEnviar">Confirmar asistencia</button>
-      <div class="estado" id="estado">💜 ¡Gracias! Tu respuesta ha sido registrada.</div>
-    </form>
+    <div style="font-size:34px;margin:8px 0 10px;">💜</div>
+    <h2>Confirmación de asistencia finalizada</h2>
+    <p class="intro" style="font-size:19px;line-height:1.5;margin-top:14px;">
+      El período para confirmar asistencia a los XV años de Almita ha finalizado.
+      <br><br>
+      Agradecemos mucho tu comprensión y el cariño hacia Almita en este momento tan especial. ✨
+    </p>
+    <button class="enviar" type="button" id="cerrarAviso" style="max-width:220px;margin-top:6px;">
+      Cerrar
+    </button>
   </div>
 </div>
 
 <script>
-const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwqUyWpldzouT5E1qqLQ5JTpRus2Q3hifabUTSwmpSr9W-tFTvm4PvZuMkRkdtxlAio/exec';
-const abrirForm=document.getElementById('abrirForm'), modalForm=document.getElementById('modalForm'), cerrarForm=document.getElementById('cerrarForm');
-const form=document.getElementById('rsvpForm'), estado=document.getElementById('estado'), botonEnviar=document.getElementById('botonEnviar');
-const radioSi=document.getElementById('si'), radioNo=document.getElementById('no'), personas=document.getElementById('personas'), campoPersonas=document.getElementById('campoPersonas');
+const abrirForm = document.getElementById('abrirForm');
+const modalForm = document.getElementById('modalForm');
+const cerrarForm = document.getElementById('cerrarForm');
+const cerrarAviso = document.getElementById('cerrarAviso');
 
-abrirForm.addEventListener('click',()=>{modalForm.classList.add('activo');modalForm.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';});
-function cerrarFormulario(){modalForm.classList.remove('activo');modalForm.setAttribute('aria-hidden','true');document.body.style.overflow='';}
-cerrarForm.addEventListener('click',cerrarFormulario);
-modalForm.addEventListener('click',e=>{if(e.target===modalForm)cerrarFormulario();});
+function abrirAviso(){
+  modalForm.classList.add('activo');
+  modalForm.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+}
 
-radioNo.addEventListener('change',()=>{if(radioNo.checked){personas.value='';personas.required=false;personas.disabled=true;campoPersonas.style.display='none';}});
-radioSi.addEventListener('change',()=>{if(radioSi.checked){personas.disabled=false;personas.required=true;campoPersonas.style.display='block';}});
+function cerrarAvisoConfirmacion(){
+  modalForm.classList.remove('activo');
+  modalForm.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
 
-form.addEventListener('submit', async e=>{
-  e.preventDefault();
-  if(!form.checkValidity()){form.reportValidity();return;}
-  const asistencia=document.querySelector('input[name="asistencia"]:checked').value;
-  const payload={
-    nombre:document.getElementById('nombre').value.trim(),
-    telefono:(()=>{const v=document.getElementById('telefono').value.trim(); const d=v.replace(/\D/g,''); return d.startsWith('502') ? '+'+d : '+502'+d;})(),
-    asistencia,
-    personas:asistencia==='Sí' ? personas.value : '0',
-    mensaje:document.getElementById('mensaje').value.trim(),
-    aceptaSms:''
-  };
-  botonEnviar.disabled=true; botonEnviar.textContent='Enviando...'; estado.style.display='none';
-  try{
-    await fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
-    estado.textContent='💜 ¡Confirmación registrada!';
-    estado.style.display='block';
-    form.reset(); personas.disabled=false; personas.required=true; campoPersonas.style.display='block';
-
-    // Evita confirmaciones repetidas y avanza automáticamente a la página final.
-    botonEnviar.textContent='Confirmado ✓';
-    setTimeout(()=>{
-      cerrarFormulario();
-      window.parent.postMessage({ type: 'almita-rsvp-confirmed' }, '*');
-
-      // Deja el formulario listo por si el invitado regresa después
-      // para actualizar su confirmación con el mismo teléfono.
-      setTimeout(()=>{
-        botonEnviar.disabled=false;
-        botonEnviar.textContent='Confirmar asistencia';
-        estado.style.display='none';
-      }, 900);
-    }, 1100);
-    return;
-  }catch(err){
-    estado.textContent='No pudimos registrar tu respuesta. Inténtalo nuevamente.'; estado.style.display='block';
-    botonEnviar.disabled=false;
-    botonEnviar.textContent='Confirmar asistencia';
-  }
+abrirForm.addEventListener('click', abrirAviso);
+cerrarForm.addEventListener('click', cerrarAvisoConfirmacion);
+cerrarAviso.addEventListener('click', cerrarAvisoConfirmacion);
+modalForm.addEventListener('click', e=>{
+  if(e.target === modalForm) cerrarAvisoConfirmacion();
 });
 </script>
 
